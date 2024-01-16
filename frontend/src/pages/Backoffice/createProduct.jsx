@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { backendURL } from "../../utils/utils";
 import axios from "axios";
 
@@ -9,6 +9,8 @@ export default function createProduct() {
   const [quantity, setQuantity] = useState();
   const [price, setPrice] = useState();
   const [IMG, setIMG] = useState();
+
+  const navigate = useNavigate();
 
   const handleFileUploadReq = async () => {
     try {
@@ -35,8 +37,8 @@ export default function createProduct() {
     try {
       if (name && price && description && quantity && IMG) {
         const data = await handleFileUploadReq();
-        console.log(data);
-        //ADD PRODUCT LOGIC
+        alert("Product Created Successfully");
+        navigate("/products");
       } else alert("Please fill the following details");
     } catch (err) {
       console.log(err);
